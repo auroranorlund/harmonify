@@ -3,7 +3,6 @@ import { defineConfig } from "vite";
 
 export default defineConfig({
   root: "src/",
-  base: "/harmonify/",
   build: {
     outDir: "../dist",
     rollupOptions: {
