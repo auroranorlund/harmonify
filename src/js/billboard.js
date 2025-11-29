@@ -20,9 +20,8 @@ document.querySelector("#top-genres-button").addEventListener("click", (e) => {
 async function displayTopTracks() {
     const formElement = document.forms["get-top-tracks"]
     const form = formDataToJSON(formElement);
-    console.log(form);
-    const url = "https://api.spotify.com/v1/me/top/tracks";
-    const topTracks = await getTop(url, form.tracksLength);
+    console.log(form.tracksLength);
+    const topTracks = await getTop("tracks", form.tracksLength);
     topTracks.items.forEach(item => {
         const track = document.createElement("div");
         track.innerHTML = `
@@ -45,7 +44,6 @@ async function displayTopTracks() {
     }
     );
 }
-
 function displayTopArtists() {
 
 }
