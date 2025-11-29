@@ -28,19 +28,21 @@ async function displayTopTracks() {
         const track = document.createElement("div");
         track.innerHTML = `
         <img src="${item.album.images[2].url}" alt="${item.name} Cover Image">
-        <p>${item.name} by <span id="track-artists"></span></p>
+        <p>${item.name} by</p>
         `
         const artists = item.artists;
-        const artistElement = document.getElementById("track-artists");
+        const artistElement = document.createElement("span");
         const artistText = "";
         if (artists.length == 1) {
             artistElement.innerHTML = `${artists[0].name}`;
+            track.appendChild(artistElement);
         }
         else {
             artists.forEach(artist =>
                 artistText.concat(",", artist.name)
             )
             artistElement.innerHTML = artistText;
+            track.appendChild(artistElement);
         }
         resultSection.appendChild(track);
     }
