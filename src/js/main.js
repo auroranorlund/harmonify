@@ -2,7 +2,7 @@ import { redirectToAuthCodeFlow, getAccessToken, fetchProfile } from "./apiHandl
 import { checkTokenExpiration } from "./apiRefreshHandler.mjs";
 
 const clientId = import.meta.env.VITE_CLIENT_ID;
-const accessToken = localStorage.getItem("access_token");
+let accessToken = localStorage.getItem("access_token");
 const section = document.getElementById("login-section");
 const params = new URLSearchParams(window.location.search);
 const code = params.get("code");
@@ -17,6 +17,7 @@ async function home() {
         else {
             checkTokenExpiration();
         }
+        accessToken = localStorage.getItem("access_token");
         const profile = await fetchProfile(accessToken);
         populateLoggedIn(profile);
     }
