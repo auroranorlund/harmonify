@@ -25,7 +25,6 @@ async function displayTopTracks() {
     console.log(topTracks);
     topTracks.items.forEach(item => {
         console.log(item);
-        /*
         const track = document.createElement("div");
         track.innerHTML = `
         <img src="${item.album.images[2].url}" alt="${item.name} Cover Image">
@@ -44,7 +43,6 @@ async function displayTopTracks() {
             artistElement.innerHTML = artistText;
         }
         resultSection.appendChild(track);
-        */
     }
     );
 }
