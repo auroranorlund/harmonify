@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sleep Outside | Home</title>
+    <link rel="stylesheet" href="../src/css/style.css" />
+    <script src="../src/js/billboard.js" type="module"></script>
+</head>
+
+<body>
+    <header class="divider" id="main-header"></header>
+    <main>
+        <h1>Billboard</h1>
+        <section>
+            <form name="get-top-tracks">
+                <label for="tracks-length">Length of Time</label>
+                <select id="tracks-length" name="tracks-length">
+                    <option value="short_term">Month</option>
+                    <option value="medium_term">6 Months</option>
+                    <option value="long_term">Year</option>
+                </select>
+                <button type="submit" id="top-tracks-button">Get Top Tracks</button>
+            </form>
+            <form name="get-top-artists">
+                <label for="artists-length">Length of Time</label>
+                <select id="artists-length" name="artists-length">
+                    <option value="short_term">Month</option>
+                    <option value="medium_term">6 Months</option>
+                    <option value="long_term">Year</option>
+                </select>
+                <button type="submit" id="top-artists-button">Get Top Artists</button>
+            </form>
+            <form name="get-top-genres">
+                <label for="genres-length">Length of Time</label>
+                <select id="genres-length" name="tracks-length">
+                    <option value="short_term">Month</option>
+                    <option value="medium_term">6 Months</option>
+                    <option value="long_term">Year</option>
+                </select>
+                <button type="submit" id="top-genres-button">Get Top Genres</button>
+            </form>
+        </section>
+        <div id="results">
+
+        </div>
+    </main>
+    <footer id="main-footer"></footer>
+</body>
+
+</html>

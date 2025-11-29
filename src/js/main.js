@@ -7,6 +7,7 @@ const section = document.getElementById("login-section");
 const params = new URLSearchParams(window.location.search);
 const code = params.get("code");
 
+// Checks to see if the user has already logged in to determine whether to display the login button or "logged in as" content
 async function home() {
     if (!code) {
         populateLogin();
@@ -25,12 +26,14 @@ async function home() {
 
 home();
 
+// Provides a button for the user to login
 function populateLogin() {
     section.innerHTML = `<button id="login-button">Login With Spotify</button>`;
     const button = document.getElementById("login-button");
     button.addEventListener("click", redirectToAuthCodeFlow.bind(this, clientId));
 }
 
+// Tells the user what Spotify account they are logged in to and gives them an option to log in again if they need to
 function populateLoggedIn(profile) {
     section.innerHTML = `
     <p>Logged in as: ${profile.display_name}</p>
