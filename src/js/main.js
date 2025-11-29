@@ -1,33 +1,39 @@
 import { redirectToAuthCodeFlow, getAccessToken, fetchProfile } from "./apiHandler.mjs";
+import { checkTokenExpiration } from "./apiRefreshHandler.mjs";
 
 const clientId = import.meta.env.VITE_CLIENT_ID;
+const accessToken = localStorage.getItem("access_token");
+const section = document.getElementById("login-section");
 const params = new URLSearchParams(window.location.search);
 const code = params.get("code");
 
 async function home() {
     if (!code) {
-        redirectToAuthCodeFlow(clientId);
+        populateLogin();
     } else {
-        const accessToken = await getAccessToken(clientId, code);
+        if (!accessToken) {
+            await getAccessToken(clientId, code);
+        }
+        else {
+            checkTokenExpiration();
+        }
         const profile = await fetchProfile(accessToken);
-        populateUI(profile);
+        populateLoggedIn(profile);
     }
 };
 
 home();
 
-function populateUI(profile) {
-    document.getElementById("displayName").innerText = profile.display_name;
-    if (profile.images[0]) {
-        const profileImage = new Image(200, 200);
-        profileImage.src = profile.images[0].url;
-        document.getElementById("avatar").appendChild(profileImage);
-        document.getElementById("imgUrl").innerText = profile.images[0].url;
-    }
-    document.getElementById("id").innerText = profile.id;
-    document.getElementById("email").innerText = profile.email;
-    document.getElementById("uri").innerText = profile.uri;
-    document.getElementById("uri").setAttribute("href", profile.external_urls.spotify);
-    document.getElementById("url").innerText = profile.href;
-    document.getElementById("url").setAttribute("href", profile.href);
+function populateLogin() {
+    section.innerHTML = `<button id="login-button">Login With Spotify</button>`;
+    const button = document.getElementById("login-button");
+    button.addEventListener("click", redirectToAuthCodeFlow.bind(this, clientId));
+}
+
+function populateLoggedIn(profile) {
+    section.innerHTML = `
+    <p>Logged in as: ${profile.display_name}</p>
+    <p>Not you? <span id="login-again">Login with a different profile.</span></p>`;
+    const reLogin = document.getElementById("login-again");
+    reLogin.addEventListener("click", redirectToAuthCodeFlow.bind(this, clientId));
 }

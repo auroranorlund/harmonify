@@ -1,3 +1,6 @@
+import { getExpirationTime } from "./apiRefreshHandler.mjs";
+
+// Prompts user to log in
 export async function redirectToAuthCodeFlow(clientId) {
     const verifier = generateCodeVerifier(128);
     const challenge = await generateCodeChallenge(verifier);
@@ -8,13 +11,14 @@ export async function redirectToAuthCodeFlow(clientId) {
     params.append("client_id", clientId);
     params.append("response_type", "code");
     params.append("redirect_uri", "https://aurora-n-harmonify.netlify.app/callback/");
-    params.append("scope", "user-read-private user-read-email");
+    params.append("scope", "user-read-private user-read-email user-top-read");
     params.append("code_challenge_method", "S256");
     params.append("code_challenge", challenge);
 
     document.location = `https://accounts.spotify.com/authorize?${params.toString()}`;
 }
 
+// Creates a code verifier required for Spotify access
 function generateCodeVerifier(length) {
     let text = '';
     let possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -25,6 +29,7 @@ function generateCodeVerifier(length) {
     return text;
 }
 
+// Creates a code challenge required for Spotify access
 async function generateCodeChallenge(codeVerifier) {
     const data = new TextEncoder().encode(codeVerifier);
     const digest = await window.crypto.subtle.digest('SHA-256', data);
@@ -34,7 +39,7 @@ async function generateCodeChallenge(codeVerifier) {
         .replace(/=+$/, '');
 }
 
-
+// Exchanges the code provided by the user logging in for an access token that is used in following API calls
 export async function getAccessToken(clientId, code) {
     const verifier = localStorage.getItem("verifier");
 
@@ -51,8 +56,11 @@ export async function getAccessToken(clientId, code) {
         body: params
     });
 
-    const { access_token } = await result.json();
-    return access_token;
+    const response = await result.json();
+    localStorage.setItem("access_token", response.access_token);
+    localStorage.setItem("refresh_token", response.refresh_token);
+    const expirationTime = getExpirationTime();
+    localStorage.setItem("expiration_time", expirationTime);
 }
 
 export async function fetchProfile(token) {
