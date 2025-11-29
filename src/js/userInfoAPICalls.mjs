@@ -2,12 +2,11 @@ import { checkTokenExpiration } from "./apiRefreshHandler.mjs";
 
 export async function getTop(type, timeRange) {
     checkTokenExpiration();
-    const token = localStorage.getItem("api_token");
+    const token = localStorage.getItem("access_token");
     const url = `https://api.spotify.com/v1/me/top/${type}?time_range=${timeRange}`;
     const result = await fetch(url, {
-        method: "GET", headers: { Authorization: `Bearer ${token}`}
+        method: "GET", headers: { Authorization: `Bearer ${token}` }
     });
-
     return await result.json();
 }
 
