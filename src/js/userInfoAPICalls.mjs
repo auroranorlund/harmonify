@@ -40,5 +40,5 @@ export function getTopGenres(topArtists) {
     });
     console.log(genres);
     genres = [...new Set(genres)];
-    console.log(genres);
+    return genres;
 }
