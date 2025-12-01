@@ -34,7 +34,7 @@ async function displayTopTracks() {
         `
         const artists = item.artists;
         const artistElement = document.createElement("span");
-        const artistText = "";
+        let artistText = "";
         let artistCount = 1;
         if (artists.length == 1) {
             artistElement.innerHTML = `${artists[0].name}`;
@@ -54,6 +54,7 @@ async function displayTopTracks() {
         }
         track.appendChild(artistElement);
         resultSection.appendChild(track);
+        trackCount += 1;
     }
     );
 }
@@ -72,13 +73,14 @@ async function displayTopArtists() {
         <p>${item.name}</p>
         `
         resultSection.appendChild(artist);
+        artistCount += 1;
     });
 }
 
 async function displayTopGenres() {
     const formElement = document.forms["get-top-genres"];
     const form = formDataToJSON(formElement);
-    const topArtists = await getTop("artists", form.artistsLength);
+    const topArtists = await getTop("artists", form.genresLength);
     const topGenres = getTopGenres(topArtists);
     resultSection.innerHTML = ``;
     console.log(topGenres);
@@ -90,6 +92,7 @@ async function displayTopGenres() {
         <p>${genreCount}. ${item}</p>
         `
         resultSection.appendChild(genre);
+        genreCount += 1;
     });
 }
 
