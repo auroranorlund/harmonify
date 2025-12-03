@@ -9,6 +9,7 @@ export default defineConfig({
       input: {
         main: resolve(__dirname, "src/index.html"),
         billboard: resolve(__dirname, "src/billboard/index.html"),
+        recommendations: resolve(__dirname, "src/recommendations/index.html"),
       },
     },
   },

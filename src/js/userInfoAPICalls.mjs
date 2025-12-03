@@ -42,3 +42,13 @@ export function getTopGenres(topArtists) {
     genres = [...new Set(genres)];
     return genres;
 }
+
+export async function lookupSpotifyDetails(id) {
+    checkTokenExpiration();
+    const token = localStorage.getItem("access_token");
+    const url = `https://api.spotify.com/v1/tracks/${id}`;
+    const result = await fetch(url, {
+        method: "GET", headers: { Authorization: `Bearer ${token}` }
+    });
+    return await result.json();
+}

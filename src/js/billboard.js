@@ -1,4 +1,5 @@
 import { getTopGenres, getTop } from "./userInfoAPICalls.mjs";
+import { getTrackRecs } from "./reccobeatsHandler.mjs";
 
 const resultSection = document.getElementById("results");
 
@@ -22,7 +23,7 @@ async function displayTopTracks() {
     const form = formDataToJSON(formElement);
     console.log(form.tracksLength);
     const topTracks = await getTop("tracks", form.tracksLength);
-    resultSection.innerHTML = ``;
+    resultSection.innerHTML = `<a href="..recommendations/index.html">Get Music Recommendations</a>`;
     console.log(topTracks);
     let trackCount = 1;
     topTracks.items.forEach(item => {
@@ -45,7 +46,7 @@ async function displayTopTracks() {
                     artistText = artist.name;
                 }
                 else {
-                    artistText = artistText.concat(",", artist.name)
+                    artistText = artistText.concat(", ", artist.name)
                 }
                 artistCount += 1;
             }
@@ -57,7 +58,10 @@ async function displayTopTracks() {
         trackCount += 1;
     }
     );
+    const trackRecs = await getTrackRecs(topTracks);
+    localStorage.setItem("trackRecs", JSON.stringify(trackRecs));
 }
+
 async function displayTopArtists() {
     const formElement = document.forms["get-top-artists"];
     const form = formDataToJSON(formElement);
