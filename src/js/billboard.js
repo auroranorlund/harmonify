@@ -58,7 +58,7 @@ async function displayTopTracks() {
         trackCount += 1;
     }
     );
-    const trackRecs = await getTrackRecs(topTracks);
+    const trackRecs = await getTrackRecs(form.tracksLength);
     localStorage.setItem("trackRecs", JSON.stringify(trackRecs));
 }
 
@@ -88,7 +88,7 @@ async function displayTopGenres() {
     const topGenres = getTopGenres(topArtists);
     resultSection.innerHTML = ``;
     console.log(topGenres);
-    genreCount = 1;
+    let genreCount = 1;
     topGenres.forEach(item => {
         console.log(item);
         const genre = document.createElement("div");
