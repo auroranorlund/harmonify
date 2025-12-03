@@ -12,7 +12,7 @@ export async function getTop(type, timeRange) {
 
 export function getTopGenres(topArtists) {
     let genres = [];
-    topArtists.forEach(artist => {
+    topArtists.items.forEach(artist => {
         let artistGenres = artist.genres;
         artistGenres.forEach(genre => {
             genres.push(genre);

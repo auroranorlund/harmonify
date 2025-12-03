@@ -2,7 +2,7 @@ import { lookupSpotifyDetails } from "./userInfoAPICalls.mjs";
 
 const baseURL = "https://api.reccobeats.com/v1/track/recommendation";
 
-export function getTrackRecs(topTracks) {
+export async function getTrackRecs(topTracks) {
     let songIds = [];
     let reccomendIds = [];
     topTracks.items.forEach(async item => {
