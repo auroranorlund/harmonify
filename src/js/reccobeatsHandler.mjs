@@ -1,12 +1,11 @@
-import { getTop, lookupSpotifyDetails } from "./userInfoAPICalls.mjs";
+import { lookupSpotifyDetails } from "./userInfoAPICalls.mjs";
 
 const baseURL = "https://api.reccobeats.com/v1/track/recommendation";
 
-export async function getTrackRecs(length) {
-    const topTracks = await getTop("tracks", length);
+export async function getTrackRecs(topTracks) {
     let songIds = [];
     let reccomendIds = [];
-    topTracks.items.forEach(async item => {
+    for (const item of topTracks.items) {
         const id = item.id;
         songIds.push(id);
         if (songIds.length == 5) {
@@ -21,7 +20,7 @@ export async function getTrackRecs(length) {
             })
             songIds = [];
         }
-    });
+    };
     console.log(reccomendIds);
     return reccomendIds;
 }

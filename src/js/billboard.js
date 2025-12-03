@@ -25,9 +25,11 @@ async function displayTopTracks() {
     const topTracks = await getTop("tracks", form.tracksLength);
     resultSection.innerHTML = `<a href="..recommendations/index.html">Get Music Recommendations</a>`;
     console.log(topTracks);
+    const songIds = [];
     let trackCount = 1;
     topTracks.items.forEach(item => {
         console.log(item);
+        songIds.push(item.id);
         const track = document.createElement("div");
         track.innerHTML = `
         <p>${trackCount}. <img src="${item.album.images[2].url}" alt="${item.name} Cover Image"></p>
@@ -58,7 +60,7 @@ async function displayTopTracks() {
         trackCount += 1;
     }
     );
-    const trackRecs = await getTrackRecs(form.tracksLength);
+    const trackRecs = await getTrackRecs(topTracks);
     localStorage.setItem("trackRecs", JSON.stringify(trackRecs));
 }
 
