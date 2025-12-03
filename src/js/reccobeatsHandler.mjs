@@ -12,12 +12,13 @@ export async function getTrackRecs(topTracks) {
             const url = `https://api.reccobeats.com/v1/track/recommendation?size=5&seeds=${songIds[0]},${songIds[1]},${songIds[2]},${songIds[3]},${songIds[4]}`;
             const result = await fetch(url, {
                 method: "GET",
-                headers: {Accept: "application/json"}
-            })
-            result.content.forEach(item => {
+                headers: { Accept: "application/json" }
+            });
+            console.log(result);
+            for (const item of result.content) {
                 const recId = item.href.replace("https://open.spotify.com/track/", "");
                 reccomendIds.push(recId);
-            })
+            };
             songIds = [];
         }
     };
