@@ -21,7 +21,7 @@ export async function getTrackRecs(topTracks) {
             console.log(result);
             const response = await result.json();
             console.log(response);
-            for (const item of response) {
+            for (const item of response.content) {
                 const recId = item.href.replace("https://open.spotify.com/track/", "");
                 reccomendIds.push(recId);
             };
