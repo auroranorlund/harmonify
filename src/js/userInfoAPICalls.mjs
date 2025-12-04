@@ -47,6 +47,7 @@ export async function lookupSpotifyDetails(id) {
     checkTokenExpiration();
     const token = localStorage.getItem("access_token");
     const url = `https://api.spotify.com/v1/tracks/${id}`;
+    console.log(url);
     const result = await fetch(url, {
         method: "GET", headers: { Authorization: `Bearer ${token}` }
     });
