@@ -36,6 +36,7 @@ async function displayTrackRecs() {
             artistElement.innerHTML = artistText;
         }
         track.appendChild(artistElement);
+        section.appendChild(track);
     };
 }
 
