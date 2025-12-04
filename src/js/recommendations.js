@@ -2,11 +2,13 @@ import { lookupSpotifyDetails } from "./userInfoAPICalls.mjs";
 
 const section = document.querySelector("#recommendations");
 
-function displayTrackRecs() {
+async function displayTrackRecs() {
     section.innerHTML = ``;
     const trackIds = JSON.parse(localStorage.getItem("trackRecs"));
-    trackIds.forEach(async id => {
+    console.log(trackIds);
+    for (const id in trackIds) {
         const trackDetails = await lookupSpotifyDetails(id);
+        console.log(trackDetails);
 
         const track = document.createElement("div");
         track.innerHTML = `
@@ -34,7 +36,7 @@ function displayTrackRecs() {
             artistElement.innerHTML = artistText;
         }
         track.appendChild(artistElement);
-    });
+    };
 }
 
 displayTrackRecs();

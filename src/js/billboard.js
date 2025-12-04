@@ -23,7 +23,7 @@ async function displayTopTracks() {
     const form = formDataToJSON(formElement);
     console.log(form.tracksLength);
     const topTracks = await getTop("tracks", form.tracksLength);
-    resultSection.innerHTML = `<a href="..recommendations/index.html">Get Music Recommendations</a>`;
+    resultSection.innerHTML = `<a href="../recommendations/index.html">Get Music Recommendations</a>`;
     console.log(topTracks);
     const songIds = [];
     let trackCount = 1;
