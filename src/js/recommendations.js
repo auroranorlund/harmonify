@@ -7,7 +7,7 @@ async function displayTrackRecs() {
     const trackIds = JSON.parse(localStorage.getItem("trackRecs"));
     console.log(trackIds);
     for (const id in trackIds) {
-        const trackDetails = await lookupSpotifyDetails(id);
+        const trackDetails = await lookupSpotifyDetails(trackIds[id]);
         console.log(trackDetails);
 
         const track = document.createElement("div");
