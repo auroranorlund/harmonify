@@ -15,7 +15,7 @@ async function displayTrackRecs() {
         <img src="${trackDetails.album.images[2].url}" alt="${trackDetails.name} Cover Image">
         <p>${trackDetails.name} by</p>
         `
-        const artists = item.artists;
+        const artists = trackDetails.artists;
         const artistElement = document.createElement("span");
         let artistText = "";
         let artistCount = 1;
