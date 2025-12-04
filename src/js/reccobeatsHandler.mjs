@@ -10,12 +10,18 @@ export async function getTrackRecs(topTracks) {
         songIds.push(id);
         if (songIds.length == 5) {
             const url = `https://api.reccobeats.com/v1/track/recommendation?size=5&seeds=${songIds[0]},${songIds[1]},${songIds[2]},${songIds[3]},${songIds[4]}`;
-            const result = await fetch(url, {
+            const myHeaders = new Headers();
+            myHeaders.append("Accept", "application/json");
+            const requestOptions = {
                 method: "GET",
-                headers: { Accept: "application/json" }
-            });
+                headers: myHeaders,
+                redirect: "follow"
+            };
+            const result = await fetch(url, requestOptions);
             console.log(result);
-            for (const item of result.json()) {
+            const response = await result.json();
+            console.log(response);
+            for (const item of response) {
                 const recId = item.href.replace("https://open.spotify.com/track/", "");
                 reccomendIds.push(recId);
             };
