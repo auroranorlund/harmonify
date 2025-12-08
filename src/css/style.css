@@ -161,4 +161,14 @@ main {
 
 .details {
   background-color: var(--secondary);
+  display: flex;
+  align-items: center;
+  
+  img {
+    max-width: 200px;
+
+  }
+  span {
+    font-size: 1.4rem;
+  }
 }
