@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Harmonify | Billboard</title>
-    <link rel="stylesheet" href="../src/css/style.css" />
+    <link rel="stylesheet" href="../css/style.css" />
     <script src="../js/billboard.js" type="module"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,10 +15,10 @@
 <body>
     <header class="divider" id="main-header"></header>
     <main>
-        <h1>Billboard</h1>
-        <section>
+        <h2>Billboard</h2>
+        <section class="billboard">
             <form name="get-top-tracks">
-                <label for="tracksLength">Length of Time</label>
+                <label for="tracksLength">Length of Time:</label>
                 <select id="tracksLength" name="tracksLength">
                     <option value="short_term">Month</option>
                     <option value="medium_term">6 Months</option>
@@ -27,7 +27,7 @@
                 <button type="submit" id="top-tracks-button">Get Top Tracks</button>
             </form>
             <form name="get-top-artists">
-                <label for="artistsLength">Length of Time</label>
+                <label for="artistsLength">Length of Time:</label>
                 <select id="artistsLength" name="artistsLength">
                     <option value="short_term">Month</option>
                     <option value="medium_term">6 Months</option>
@@ -36,7 +36,7 @@
                 <button type="submit" id="top-artists-button">Get Top Artists</button>
             </form>
             <form name="get-top-genres">
-                <label for="genresLength">Length of Time</label>
+                <label for="genresLength">Length of Time:</label>
                 <select id="genresLength" name="genresLength">
                     <option value="short_term">Month</option>
                     <option value="medium_term">6 Months</option>
@@ -45,7 +45,7 @@
                 <button type="submit" id="top-genres-button">Get Top Genres</button>
             </form>
         </section>
-        <section id="results">
+        <section id="results" class="results">
 
         </section>
     </main>

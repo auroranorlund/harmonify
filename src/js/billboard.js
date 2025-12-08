@@ -1,5 +1,8 @@
 import { getTopGenres, getTop } from "./userInfoAPICalls.mjs";
 import { getTrackRecs } from "./reccobeatsHandler.mjs";
+import { loadHeaderFooter } from "./utils.mjs";
+
+loadHeaderFooter();
 
 const resultSection = document.getElementById("results");
 
@@ -23,6 +26,7 @@ async function displayTopTracks() {
     const form = formDataToJSON(formElement);
     console.log(form.tracksLength);
     const topTracks = await getTop("tracks", form.tracksLength);
+    localStorage.setItem("topTracks", topTracks);
     resultSection.innerHTML = `<a href="../recommendations/index.html">Get Music Recommendations</a>`;
     console.log(topTracks);
     const songIds = [];
@@ -30,22 +34,34 @@ async function displayTopTracks() {
     topTracks.items.forEach(item => {
         console.log(item);
         songIds.push(item.id);
+
         const track = document.createElement("div");
-        track.innerHTML = `
-        <p>${trackCount}. <img src="${item.album.images[2].url}" alt="${item.name} Cover Image"></p>
-        <p>${item.name} by</p>
-        `
+        track.classList.add("details");
+
+        const countElement = document.createElement("span");
+        countElement.innerHTML = `${trackCount}.`
+        track.appendChild(countElement);
+
+        const imgElement = document.createElement("img");
+        imgElement.setAttribute("src", item.album.images[1].url);
+        imgElement.setAttribute("alt", `${item.name} Cover Image`);
+        track.appendChild(imgElement);
+
+        const nameElement = document.createElement("span");
+        nameElement.innerHTML = item.name;
+        track.appendChild(nameElement);
+
         const artists = item.artists;
         const artistElement = document.createElement("span");
         let artistText = "";
         let artistCount = 1;
         if (artists.length == 1) {
-            artistElement.innerHTML = `${artists[0].name}`;
+            artistElement.innerHTML = `by ${artists[0].name}`;
         }
         else {
             artists.forEach(artist => {
                 if (artistCount == 1) {
-                    artistText = artist.name;
+                    artistText = `by ${artist.name}`;
                 }
                 else {
                     artistText = artistText.concat(", ", artist.name)
