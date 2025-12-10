@@ -28,7 +28,8 @@ async function displayTrackRecs() {
         labelElement.appendChild(nameElement);
 
         const artists = trackDetails.artists;
-        const artistElement = document.createElement("span");
+        const artistElement = document.createElement("p");
+        artistElement.classList.appendChild("artist-info");
         let artistText = "";
         let artistCount = 1;
         if (artists.length == 1) {
