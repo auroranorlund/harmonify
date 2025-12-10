@@ -29,7 +29,7 @@ async function displayTrackRecs() {
 
         const artists = trackDetails.artists;
         const artistElement = document.createElement("p");
-        artistElement.classList.appendChild("artist-info");
+        artistElement.classList.add("artist-info");
         let artistText = "";
         let artistCount = 1;
         if (artists.length == 1) {
