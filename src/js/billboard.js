@@ -25,7 +25,6 @@ async function displayTopTracks() {
     const formElement = document.forms["get-top-tracks"]
     const form = formDataToJSON(formElement);
     const topTracks = await getTop("tracks", form.tracksLength);
-    localStorage.setItem("topTracks", JSON.stringify(topTracks));
     resultSection.innerHTML = `<a href="../recommendations/index.html">Get Music Recommendations</a>`;
     console.log(topTracks);
     const songIds = [];
@@ -86,7 +85,6 @@ async function displayTopArtists() {
     const formElement = document.forms["get-top-artists"];
     const form = formDataToJSON(formElement);
     const topArtists = await getTop("artists", form.artistsLength);
-    localStorage.setItem("topArtists", JSON.stringify(topArtists));
     resultSection.innerHTML = ``;
     console.log(topArtists);
     let artistCount = 1;
@@ -107,7 +105,6 @@ async function displayTopGenres() {
     const form = formDataToJSON(formElement);
     const topArtists = await getTop("artists", form.genresLength);
     const topGenres = getTopGenres(topArtists);
-    localStorage.setItem("topGenres", JSON.stringify(topGenres));
     resultSection.innerHTML = ``;
     console.log(topGenres);
     let genreCount = 1;
