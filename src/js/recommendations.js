@@ -1,4 +1,7 @@
 import { lookupSpotifyDetails } from "./userInfoAPICalls.mjs";
+import { loadHeaderFooter } from "./utils.mjs";
+
+loadHeaderFooter();
 
 const section = document.querySelector("#recommendations");
 
@@ -11,21 +14,30 @@ async function displayTrackRecs() {
         console.log(trackDetails);
 
         const track = document.createElement("div");
-        track.innerHTML = `
-        <img src="${trackDetails.album.images[2].url}" alt="${trackDetails.name} Cover Image">
-        <p>${trackDetails.name} by</p>
-        `
+        track.classList.add("details");
+
+        const imgElement = document.createElement("img");
+        imgElement.setAttribute("src", trackDetails.album.images[1].url);
+        imgElement.setAttribute("alt", `${trackDetails.name} Cover Image`);
+        track.appendChild(imgElement);
+
+        const labelElement = document.createElement("div");
+
+        const nameElement = document.createElement("p");
+        nameElement.innerHTML = trackDetails.name;
+        labelElement.appendChild(nameElement);
+
         const artists = trackDetails.artists;
         const artistElement = document.createElement("span");
         let artistText = "";
         let artistCount = 1;
         if (artists.length == 1) {
-            artistElement.innerHTML = `${artists[0].name}`;
+            artistElement.innerHTML = ` by ${artists[0].name}`;
         }
         else {
             artists.forEach(artist => {
                 if (artistCount == 1) {
-                    artistText = artist.name;
+                    artistText = ` by ${artist.name}`;
                 }
                 else {
                     artistText = artistText.concat(", ", artist.name)
@@ -35,7 +47,8 @@ async function displayTrackRecs() {
             )
             artistElement.innerHTML = artistText;
         }
-        track.appendChild(artistElement);
+        labelElement.appendChild(artistElement);
+        track.appendChild(labelElement);
         section.appendChild(track);
     };
 }
