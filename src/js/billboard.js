@@ -24,7 +24,6 @@ document.querySelector("#top-genres-button").addEventListener("click", (e) => {
 async function displayTopTracks() {
     const formElement = document.forms["get-top-tracks"]
     const form = formDataToJSON(formElement);
-    console.log(form.tracksLength);
     const topTracks = await getTop("tracks", form.tracksLength);
     localStorage.setItem("topTracks", JSON.stringify(topTracks));
     resultSection.innerHTML = `<a href="../recommendations/index.html">Get Music Recommendations</a>`;
@@ -32,7 +31,6 @@ async function displayTopTracks() {
     const songIds = [];
     let trackCount = 1;
     topTracks.items.forEach(item => {
-        console.log(item);
         songIds.push(item.id);
 
         const track = document.createElement("div");
@@ -93,7 +91,6 @@ async function displayTopArtists() {
     console.log(topArtists);
     let artistCount = 1;
     topArtists.items.forEach(item => {
-        console.log(item);
         const artist = document.createElement("div");
         artist.classList.add("details");
         artist.innerHTML = `
@@ -115,7 +112,6 @@ async function displayTopGenres() {
     console.log(topGenres);
     let genreCount = 1;
     topGenres.forEach(item => {
-        console.log(item);
         const genre = document.createElement("div");
         genre.classList.add("details");
         genre.classList.add("genres");
