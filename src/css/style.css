@@ -1,7 +1,7 @@
 :root {
   /* colors */
   --text: #e8eee2;
-  --background: #12160d;
+  --background: #0d160e;
   --primary: #b4caa0;
   --secondary: #3e6f4d;
   --accent: #76b297;
@@ -160,15 +160,62 @@ main {
 /* Track Details Display Styling */
 
 .details {
-  background-color: var(--secondary);
   display: flex;
   align-items: center;
+  justify-content: center;
+  align-content: center;
+  justify-items: center;
+  margin: 1rem;
+  padding: 1rem;
+  flex-wrap: wrap;
+  text-align: center;
   
   img {
     max-width: 200px;
+    margin: 1rem;
 
   }
-  span {
+  p {
     font-size: 1.4rem;
+    padding: 0.25rem;
+  }
+  span {
+    font-size: 3rem;
+    font-weight: bold;
+    margin: 1rem;
+  }
+}
+
+.artist-info {
+  font-style: italic;
+}
+
+.results {
+  a {
+      padding: 0.5em 2em;
+      background-color: var(--accent);
+      color: var(--background);
+      margin: 3rem auto;
+      display: block;
+      border: 0;
+      font-size: 1.4rem;
+      cursor: pointer;
+      border-radius: 0.5rem;
+      transition: background-color 1.5s ease, color 1.2s ease;
+      text-decoration: none;
+      max-width: 500px;
+      text-align: center;
+    
+      &:hover {
+        background-color: var(--secondary);
+        color: var(--text);
+      }
+  }
+}
+
+.genres {
+  p {
+    text-transform: capitalize;
+    font-size: 2rem;
   }
 }

@@ -47,16 +47,19 @@ async function displayTopTracks() {
         imgElement.setAttribute("alt", `${item.name} Cover Image`);
         track.appendChild(imgElement);
 
-        const nameElement = document.createElement("span");
+        const labelElement = document.createElement("div");
+
+        const nameElement = document.createElement("p");
         nameElement.innerHTML = item.name;
-        track.appendChild(nameElement);
+        labelElement.appendChild(nameElement);
 
         const artists = item.artists;
-        const artistElement = document.createElement("span");
+        const artistElement = document.createElement("p");
+        artistElement.classList.add("artist-info");
         let artistText = "";
         let artistCount = 1;
         if (artists.length == 1) {
-            artistElement.innerHTML = `by ${artists[0].name}`;
+            artistElement.innerHTML = ` by ${artists[0].name}`;
         }
         else {
             artists.forEach(artist => {
@@ -71,7 +74,8 @@ async function displayTopTracks() {
             )
             artistElement.innerHTML = artistText;
         }
-        track.appendChild(artistElement);
+        labelElement.appendChild(artistElement);
+        track.appendChild(labelElement);
         resultSection.appendChild(track);
         trackCount += 1;
     }
@@ -84,15 +88,16 @@ async function displayTopArtists() {
     const formElement = document.forms["get-top-artists"];
     const form = formDataToJSON(formElement);
     const topArtists = await getTop("artists", form.artistsLength);
-    localStorage.setItem("topArtists", JSON.stringify("topArtists"));
+    localStorage.setItem("topArtists", JSON.stringify(topArtists));
     resultSection.innerHTML = ``;
     console.log(topArtists);
     let artistCount = 1;
     topArtists.items.forEach(item => {
         console.log(item);
         const artist = document.createElement("div");
+        artist.classList.add("details");
         artist.innerHTML = `
-        <p>${artistCount}. <img src="${item.images[0].url}" alt="Picture of ${item.name}";></p>
+        <span>#${artistCount}</span> <img src="${item.images[0].url}" alt="Picture of ${item.name}";></p>
         <p>${item.name}</p>
         `
         resultSection.appendChild(artist);
@@ -112,8 +117,10 @@ async function displayTopGenres() {
     topGenres.forEach(item => {
         console.log(item);
         const genre = document.createElement("div");
+        genre.classList.add("details");
+        genre.classList.add("genres");
         genre.innerHTML = `
-        <p>${genreCount}. ${item}</p>
+        <p><span>#${genreCount}</span> ${item}</p>
         `
         resultSection.appendChild(genre);
         genreCount += 1;
